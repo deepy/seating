@@ -9,5 +9,34 @@
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     </head>
     <body>
+    <script>
+        // Make an SVG Container
+        var svgContainer = d3.select("body").append("svg")
+                                            .attr("width", 200)
+                                            .attr("height", 200);
+
+        function rectangle(container, x, y, width, height) {
+            var rect = container.append("rect")
+                                     .attr("x", x)
+                                     .attr("y", y)
+                                     .attr("width", width)
+                                     .attr("height", height)
+                                     .attr("stroke", "black")
+                                     .attr("fill", "steelblue");
+        }
+
+        // width/height is per seat, there's two seats per table.
+        function makeTable(container, width, height, seats) {
+            var x = 0;
+            var y = 0;
+            for (i = 0; i<seats; i++) {
+                rectangle(container, x, y, width, height);
+                rectangle(container, x+width, y, width, height);
+                y += height;
+            }
+        }
+
+        makeTable(svgContainer, 20, 20, 4);
+    </script>
     </body>
 </html>
